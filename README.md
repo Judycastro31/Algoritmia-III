@@ -3,7 +3,7 @@ Este proyecto corresponde a la Unidad III de Algoritmia, donde se implementan do
 
 ## **El proyecto incluye:**
 
-N1.java (Consola): Interacción mediante comandos de texto en la terminal.
+CodigoN1.java (Consola): Interacción mediante comandos de texto en la terminal.
 
 GraficosTortugaGUI.java (GUI): Visualización de los dibujos en una ventana gráfica usando Swing.
 
@@ -41,13 +41,13 @@ Sistema operativo: Multiplataforma (Windows, macOS, Linux)
 
 ### **1. Clonar el repositorio**
 
-git clone <URL_DEL_REPOSITORIO>
+git clone (https://github.com/Judycastro31/Algoritmia-III.git)
+
 cd GraficosTortuga/desarrollounidadIII
 
-### **2. Ejecutar versión consola (N1.java)**
-javac N1.java
-java N1
-
+### **2. Ejecutar versión consola (CodigoN1.java)**
+javac CodigoN1.java
+java codigoN1
 ### **Ejecutar versión GUI (GraficosTortugaGUI.java)**
 
 javac GraficosTortugaGUI.java
