@@ -7,7 +7,7 @@ CodigoN1.java (Consola): Interacción mediante comandos de texto en la terminal.
 
 GraficosTortugaGUI.java (GUI): Visualización de los dibujos en una ventana gráfica usando Swing.
 
-Todos los códigos y el diagrama de flujo (diagrama_de_flujo.pdf) están dentro de la carpeta desarrollounidadIII.
+Todos los códigos y el diagrama de flujo (diagrama_de_flujo.pdf) están dentro de la carpeta DesarrolloActividadNIII.
 
 ## **Funcionalidades**
 
