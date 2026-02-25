@@ -1,6 +1,8 @@
 import javax.swing.*;
 import java.awt.*;
 import java.util.Scanner;
+import java.util.ArrayList;
+import java.io.PrintWriter;
 
 public class GraficosTortugaGUI extends JPanel {
     static char[][] t = new char[30][30];
@@ -8,6 +10,7 @@ public class GraficosTortugaGUI extends JPanel {
     static char c = '*';
     static final int[] dx = {-1, -1, 0, 1, 1, 1, 0, -1};
     static final int[] dy = {0, 1, 1, 1, 0, -1, -1, -1};
+    static ArrayList<String> instrucciones = new ArrayList<>();
 
     public GraficosTortugaGUI() {
         setPreferredSize(new Dimension(600, 600));
@@ -21,7 +24,7 @@ public class GraficosTortugaGUI extends JPanel {
     }
 
     public static void mostrarVentana() {
-        JFrame v = new JFrame("Tortuga Gráfica");
+        JFrame v = new JFrame("Algoritmia Unidad 3");
         v.add(new GraficosTortugaGUI());
         v.pack();
         v.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
@@ -42,34 +45,91 @@ public class GraficosTortugaGUI extends JPanel {
     }
 
     private static int mostrarMenu(Scanner scanner) {
-        System.out.println("1. Caracter 2. GI 3. GD 4. AV 5. BL 6. SL 7. BO 8. Mostrar 0. Salir");
+        System.out.println("\n===== MENÚ Autores: Judy y Andres =====");
+        System.out.println("1. Elegir Caracter");
+        System.out.println("2. Girar Izquierda (GI)");
+        System.out.println("3. Girar Derecha (GD)");
+        System.out.println("4. Avanzar (AV)");
+        System.out.println("5. Bajar Lapiz (BL)");
+        System.out.println("6. Levantar Lapiz (SL)");
+        System.out.println("7. Borrar (BO)");
+        System.out.println("8. Mostrar Tablero");
+        System.out.println("9. Ver Instrucciones");
+        System.out.println("10. Guardar Instrucciones");
+        System.out.println("0. Salir");
+        System.out.print("Elige una opción: ");
+
         return scanner.nextInt();
     }
 
-    private static void procesarOpcion(int op, Scanner scanner) {
+   private static void procesarOpcion(int op, Scanner scanner) {
+
         switch (op) {
-            case 1: c = scanner.next().charAt(0); break;
+
+            case 1:
+                System.out.print("Ingrese caracter: ");
+                c = scanner.next().charAt(0);
+                instrucciones.add("Caracter " + c);
+                break;
+
             case 2:
-                int ang = scanner.nextInt();
-                if (ang % 45 == 0) {
-                    d = (d - ang / 45 + 8) % 8;
+                System.out.print("Ingrese ángulo (solo 45): ");
+                int ai = scanner.nextInt();
+                if (ai == 45) {
+                    d = (d - 1 + 8) % 8;
+                    instrucciones.add("GI 45");
                 } else {
-                   System.out.println("El ángulo debe ser múltiplo de 45");
+                    System.out.println("Solo se permite girar 45 grados.");
                 }
-            break;
+                break;
+
             case 3:
-               int ang2 = scanner.nextInt();
-               if (ang2 % 45 == 0) {
-                   d = (d + ang2 / 45) % 8;
-               } else {
-                 System.out.println("El ángulo debe ser múltiplo de 45");
-               }
-            break;
-            case 4: avanzar(scanner.nextInt()); break;
-            case 5: t[x][y] = c; l = 1; break;
-            case 6: l = 0; break;
-            case 7: t[x][y] = ' '; l = 2; break;
-            case 8: mostrarVentana(); break;
+                System.out.print("Ingrese ángulo (solo 45): ");
+                int ad = scanner.nextInt();
+                if (ad == 45) {
+                    d = (d + 1) % 8;
+                    instrucciones.add("GD 45");
+                } else {
+                    System.out.println("Solo se permite girar 45 grados.");
+                }
+                break;
+
+            case 4:
+                System.out.print("Pasos a avanzar: ");
+                int p = scanner.nextInt();
+                instrucciones.add("AV " + p);
+                avanzar(p);
+                break;
+
+            case 5:
+                l = 1;
+                t[x][y] = c;
+                instrucciones.add("BL");
+                break;
+
+            case 6:
+                l = 0;
+                instrucciones.add("SL");
+                break;
+
+            case 7:
+                l = 2;
+                instrucciones.add("BO");
+                break;
+
+            case 8:
+                mostrarVentana();
+                break;
+
+            case 9:
+                System.out.println("\n=== Instrucciones Ejecutadas ===");
+                for (String ins : instrucciones)
+                    System.out.println(ins);
+                break;
+
+            case 10:
+                guardarInstrucciones();
+                break;
         }
     }
 
@@ -81,4 +141,21 @@ public class GraficosTortugaGUI extends JPanel {
             }
         }
     }
-} 
+
+    private static void guardarInstrucciones() {
+        try {
+            PrintWriter pw = new PrintWriter("instrucciones.txt");
+            for (String ins : instrucciones)
+                pw.println(ins);
+            pw.close();
+            System.out.println("Instrucciones guardadas correctamente.");
+        } catch (Exception e) {
+            System.out.println("Error al guardar el archivo.");
+        }
+    }
+
+    public static ArrayList<String> getInstrucciones() {
+        return instrucciones;
+    }
+
+}
