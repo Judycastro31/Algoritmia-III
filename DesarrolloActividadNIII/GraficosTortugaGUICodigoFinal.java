@@ -4,7 +4,7 @@ import java.util.Scanner;
 
 public class GraficosTortugaGUI extends JPanel {
     static char[][] t = new char[30][30];
-    static int x = 15, y = 15, d = 2, l = 0;
+    static int x = 0, y = 0, d = 2, l = 0;
     static char c = '*';
     static final int[] dx = {-1, -1, 0, 1, 1, 1, 0, -1};
     static final int[] dy = {0, 1, 1, 1, 0, -1, -1, -1};
@@ -49,8 +49,22 @@ public class GraficosTortugaGUI extends JPanel {
     private static void procesarOpcion(int op, Scanner scanner) {
         switch (op) {
             case 1: c = scanner.next().charAt(0); break;
-            case 2: d = (d - scanner.nextInt() / 45 + 8) % 8; break;
-            case 3: d = (d + scanner.nextInt() / 45) % 8; break;
+            case 2:
+                int ang = scanner.nextInt();
+                if (ang % 45 == 0) {
+                    d = (d - ang / 45 + 8) % 8;
+                } else {
+                   System.out.println("El ángulo debe ser múltiplo de 45");
+                }
+            break;
+            case 3:
+               int ang2 = scanner.nextInt();
+               if (ang2 % 45 == 0) {
+                   d = (d + ang2 / 45) % 8;
+               } else {
+                 System.out.println("El ángulo debe ser múltiplo de 45");
+               }
+            break;
             case 4: avanzar(scanner.nextInt()); break;
             case 5: t[x][y] = c; l = 1; break;
             case 6: l = 0; break;
